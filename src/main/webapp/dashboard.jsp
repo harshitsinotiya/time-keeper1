@@ -9,7 +9,7 @@
     <title>Dashboard - Time Keeper</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        /* Global Styles */
+       
         * {
             margin: 0;
             padding: 0;
@@ -215,7 +215,7 @@
             margin-top: auto;
         }
         
-        /* Responsive Design */
+      
         @media (max-width: 768px) {
             .welcome-section h1 {
                 font-size: 2.5rem;
@@ -273,7 +273,7 @@
     </header>
 
     <main>
-        <!-- Messages -->
+      
         <c:if test="${not empty sessionScope.message}">
             <div class="message">
                 ${sessionScope.message}
@@ -415,8 +415,7 @@
         
         setInterval(updateTime, 1000);
         updateTime();
-        
-        // Auto-hide messages after 5 seconds
+     
         setTimeout(() => {
             const messages = document.querySelectorAll('.message, .error');
             messages.forEach(msg => {
