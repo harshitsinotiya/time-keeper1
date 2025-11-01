@@ -57,13 +57,12 @@ public class TaskServlet extends HttpServlet {
                     filteredTasks = taskDAO.getTasksByUser(user);
             }
             
-            // Sort tasks: incomplete first, then by deadline, then by priority
             filteredTasks.sort((t1, t2) -> {
-                // Completed tasks go to the bottom
+                
                 if (t1.getIsCompleted() && !t2.getIsCompleted()) return 1;
                 if (!t1.getIsCompleted() && t2.getIsCompleted()) return -1;
                 
-                // Then sort by deadline (tasks without deadline go last)
+               
                 if (t1.getDeadline() != null && t2.getDeadline() != null) {
                     int deadlineCompare = t1.getDeadline().compareTo(t2.getDeadline());
                     if (deadlineCompare != 0) return deadlineCompare;
@@ -73,13 +72,13 @@ public class TaskServlet extends HttpServlet {
                     return 1;
                 }
                 
-                // Then sort by priority (HIGH first)
+               
                 return t2.getPriority().compareTo(t1.getPriority());
             });
             
             request.setAttribute("tasks", filteredTasks);
             
-            // Calculate statistics for the page
+          
             calculateTaskStats(request, user);
             
             request.getRequestDispatcher("/tasks.jsp").forward(request, response);
@@ -160,7 +159,6 @@ public class TaskServlet extends HttpServlet {
         System.out.println("Duration: " + durationStr);
         System.out.println("Description: " + description);
         
-        // Validate required fields
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Task name is required");
         }
@@ -169,7 +167,7 @@ public class TaskServlet extends HttpServlet {
         try {
             priority = Task.Priority.valueOf(priorityStr.toUpperCase());
         } catch (IllegalArgumentException e) {
-            priority = Task.Priority.MEDIUM; // Default to medium if invalid
+            priority = Task.Priority.MEDIUM; 
         }
         
         Date deadline = null;
@@ -181,7 +179,7 @@ public class TaskServlet extends HttpServlet {
                 deadline = dateFormat.parse(deadlineStr);
             } catch (Exception e) {
                 System.err.println("Error parsing deadline: " + e.getMessage());
-                // Continue without deadline if parsing fails
+               
             }
         }
         
@@ -190,7 +188,7 @@ public class TaskServlet extends HttpServlet {
                 duration = Integer.parseInt(durationStr);
             } catch (NumberFormatException e) {
                 System.err.println("Error parsing duration: " + e.getMessage());
-                // Continue without duration if parsing fails
+                
             }
         }
         
@@ -266,14 +264,14 @@ public class TaskServlet extends HttpServlet {
             throw new RuntimeException("Task not found with ID: " + taskId);
         }
         
-        // Update task properties
+
         task.setName(name.trim());
         task.setDescription(description != null ? description.trim() : null);
         
         try {
             task.setPriority(Task.Priority.valueOf(priorityStr.toUpperCase()));
         } catch (IllegalArgumentException e) {
-            // Keep current priority if invalid
+         
         }
         
         if (deadlineStr != null && !deadlineStr.trim().isEmpty()) {
@@ -378,14 +376,13 @@ public class TaskServlet extends HttpServlet {
         request.setAttribute("highPriorityTasks", highPriorityTasks);
         request.setAttribute("overdueTasks", overdueTasks);
         
-        // Calculate completion percentage
         double completionRate = totalTasks > 0 ? (double) completedTasks / totalTasks * 100 : 0;
         request.setAttribute("completionRate", Math.round(completionRate));
     }
     
     @Override
     public void destroy() {
-        // Clean up resources if needed
+       
         super.destroy();
     }
 }
