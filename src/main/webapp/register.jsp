@@ -1,0 +1,45 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register - Time Keeper</title>
+    <style>
+        /* Same styles as login.jsp */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); color: white; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
+        .register-container { background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px; backdrop-filter: blur(10px); box-shadow: 0 8px 16px rgba(0,0,0,0.2); width: 100%; max-width: 400px; }
+        h1 { text-align: center; margin-bottom: 1rem; }
+        input { width: 100%; padding: 0.75rem; margin: 0.5rem 0; border: none; border-radius: 4px; }
+        button { width: 100%; padding: 0.75rem; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; margin: 0.5rem 0; }
+        .error { color: #ff5252; background: rgba(255,255,255,0.2); padding: 0.5rem; border-radius: 4px; margin: 0.5rem 0; }
+        .links { text-align: center; margin-top: 1rem; }
+        .links a { color: white; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h1>Time Keeper</h1>
+        <h2>Register</h2>
+        
+        <% if (request.getAttribute("error") != null) { %>
+            <div class="error"><%= request.getAttribute("error") %></div>
+        <% } %>
+        
+        <form action="auth" method="post">
+            <input type="hidden" name="action" value="register">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="password" name="confirmPassword" placeholder="Confirm Password" required>
+            <button type="submit">Register</button>
+        </form>
+        
+        <div class="links">
+            <p>Already have an account? <a href="login.jsp">Login here</a></p>
+        </div>
+    </div>
+</body>
+</html>
