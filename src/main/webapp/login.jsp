@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <title>Login - Time Keeper</title>
     <style>
-        /* Add your CSS styles from the original HTML */
+        
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); color: white; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
         .login-container { background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px; backdrop-filter: blur(10px); box-shadow: 0 8px 16px rgba(0,0,0,0.2); width: 100%; max-width: 400px; }
