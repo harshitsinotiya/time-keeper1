@@ -206,9 +206,9 @@
             }
         %>
         
-        <!-- Debug information (only show in development) -->
+      
         <%
-            // Determine which exception to show for debugging
+            
             Throwable debugException = null;
             if (servletException != null) {
                 debugException = servletException;
@@ -238,7 +238,7 @@
     </div>
 
     <script>
-        // Log error to console for debugging
+    
         <%
             if (servletException != null) {
         %>
@@ -251,7 +251,7 @@
             }
         %>
         
-        // Auto-redirect to dashboard after 10 seconds
+       
         setTimeout(() => {
             window.location.href = 'dashboard';
         }, 10000);
