@@ -193,7 +193,7 @@
             min-width: 150px;
         }
         
-        /* Control button styles */
+      
         .btn-start { background-color: #4CAF50; }
         .btn-stop { background-color: #ff5252; }
         .btn-reset { background-color: #2196F3; }
@@ -312,13 +312,12 @@
     </header>
 
     <main>
-        <!-- Digital Clock Section -->
+ 
         <section>
             <div id="clock">--:--:--</div>
             <p id="date">Loading...</p>
         </section>
         
-        <!-- Timer Section -->
         <section>
             <h2>Timer</h2>
             <div class="timer-display" id="timer-display">00:00:00</div>
@@ -346,7 +345,7 @@
             </div>
         </section>
         
-        <!-- Stopwatch Section -->
+    
         <section>
             <h2>Stopwatch</h2>
             <div class="timer-display" id="stopwatch-display">00:00:00</div>
@@ -357,7 +356,7 @@
             </div>
         </section>
         
-        <!-- Alarm Section -->
+        
         <section>
             <h2>Alarm</h2>
             <div class="input-group">
@@ -666,7 +665,7 @@
             if (this.value > 59) this.value = 59;
         });
         
-        // Quick timer buttons
+      
         function setQuickTimer(minutes) {
             document.getElementById('timer-hours').value = 0;
             document.getElementById('timer-minutes').value = minutes;
@@ -674,20 +673,20 @@
             console.log("Quick timer set for", minutes, "minutes");
         }
         
-        // Initialize the application
+       
         function init() {
-            // Start the clock
+            
             updateClock();
             setInterval(updateClock, 1000);
             
-            // Initialize displays with default values
+          
             updateTimerDisplay();
             updateStopwatchDisplay();
             
             console.log('⏰ Time Keeper Clock initialized successfully');
         }
         
-        // Run initialization when page loads
+      
         window.onload = init;
     </script>
 </body>
