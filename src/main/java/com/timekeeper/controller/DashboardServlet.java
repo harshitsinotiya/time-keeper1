@@ -31,7 +31,7 @@ public class DashboardServlet extends HttpServlet {
         
         HttpSession session = request.getSession(false);
         
-        // Check if user is logged in
+       
         if (session == null || session.getAttribute("user") == null) {
             response.sendRedirect("login.jsp");
             return;
@@ -40,10 +40,10 @@ public class DashboardServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
         
         try {
-            // Get all tasks for statistics
+            
             List<Task> allTasks = taskDAO.getTasksByUser(user);
             
-            // Calculate statistics
+         
             int totalTasks = allTasks.size();
             int completedTasks = (int) allTasks.stream().filter(Task::getIsCompleted).count();
             int pendingTasks = totalTasks - completedTasks;
@@ -51,13 +51,12 @@ public class DashboardServlet extends HttpServlet {
                     .filter(task -> task.getPriority() == Task.Priority.HIGH)
                     .count();
 
-            // Get recent tasks (last 5 tasks) - using collect(Collectors.toList()) instead of toList()
+          
             List<Task> recentTasks = allTasks.stream()
                     .sorted((t1, t2) -> t2.getCreatedAt().compareTo(t1.getCreatedAt()))
                     .limit(5)
                     .collect(Collectors.toList());
 
-            // Get upcoming tasks (due in next 7 days and not completed)
             List<Task> upcomingTasks = allTasks.stream()
                     .filter(task -> !task.getIsCompleted() && task.getDeadline() != null)
                     .filter(task -> {
@@ -69,7 +68,7 @@ public class DashboardServlet extends HttpServlet {
                     .limit(5)
                     .collect(Collectors.toList());
 
-            // Set attributes for JSP
+        
             request.setAttribute("totalTasks", totalTasks);
             request.setAttribute("completedTasks", completedTasks);
             request.setAttribute("pendingTasks", pendingTasks);
@@ -78,7 +77,6 @@ public class DashboardServlet extends HttpServlet {
             request.setAttribute("upcomingTasks", upcomingTasks);
             request.setAttribute("username", user.getUsername());
 
-            // Forward to dashboard JSP
             request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
 
         } catch (Exception e) {
