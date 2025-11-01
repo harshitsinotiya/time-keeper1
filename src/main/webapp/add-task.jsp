@@ -7,7 +7,7 @@
     <title>Add Task - Time Keeper</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        /* Include all the styles from dashboard.jsp */
+   
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); color: white; min-height: 100vh; display: flex; flex-direction: column; }
         header { background-color: rgba(0, 0, 0, 0.7); padding: 1rem; text-align: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
@@ -25,7 +25,7 @@
         button:hover { background-color: #45a049; }
         footer { background-color: rgba(0, 0, 0, 0.7); padding: 1rem; text-align: center; margin-top: auto; }
 
-        /* Form Styles */
+     
         .form-group { margin-bottom: 1rem; }
         label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
         input, select, textarea { 
@@ -92,7 +92,7 @@
             transform: translateY(-2px);
         }
 
-        /* Messages */
+  
         .message { background-color: rgba(46, 213, 115, 0.2); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #2ed573; }
         .error { background-color: rgba(255, 82, 82, 0.2); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #ff5252; }
 
@@ -124,7 +124,7 @@
     </header>
 
     <main>
-        <!-- Messages -->
+       
         <c:if test="${not empty sessionScope.message}">
             <div class="message">
                 ${sessionScope.message}
@@ -273,7 +273,7 @@
             }
         }
 
-        // Voice recognition
+
         function startVoiceRecognition() {
             if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
                 alert('Your browser does not support speech recognition. Try Chrome or Edge.');
@@ -316,7 +316,6 @@
             document.getElementById('taskForm').reset();
         }
 
-        // Auto-hide messages after 5 seconds
         setTimeout(() => {
             const messages = document.querySelectorAll('.message, .error');
             messages.forEach(msg => {
