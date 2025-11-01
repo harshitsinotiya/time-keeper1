@@ -5,7 +5,7 @@
     <title>Digital Clock - Time Keeper</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        /* Your existing CSS remains the same */
+      
         * {
             margin: 0;
             padding: 0;
@@ -192,7 +192,6 @@
             min-width: 150px;
         }
         
-        /* Control button styles */
         .btn-start { background-color: #4CAF50; }
         .btn-stop { background-color: #ff5252; }
         .btn-reset { background-color: #2196F3; }
@@ -306,13 +305,12 @@
     </header>
 
     <main>
-        <!-- Digital Clock Section -->
+      
         <section>
             <div id="clock">--:--:--</div>
             <p id="date">Loading...</p>
         </section>
-        
-        <!-- Timer Section -->
+     
         <section>
             <h2>Timer</h2>
             <div class="timer-display" id="timer-display">00:00:00</div>
@@ -340,7 +338,7 @@
             </div>
         </section>
         
-        <!-- Stopwatch Section -->
+   
         <section>
             <h2>Stopwatch</h2>
             <div class="timer-display" id="stopwatch-display">00:00:00</div>
@@ -350,8 +348,7 @@
                 <button onclick="resetStopwatch()" class="btn-reset">Reset Stopwatch</button>
             </div>
         </section>
-        
-        <!-- Alarm Section -->
+      
         <section>
             <h2>Alarm</h2>
             <div class="input-group">
@@ -368,9 +365,9 @@
     </footer>
 
     <script>
-        // ==================== SESSION MANAGEMENT ====================
+     
         
-        // Check user session and update UI
+  
         function checkUserSession() {
             const username = localStorage.getItem('timekeeper_username');
             const welcomeMessage = document.getElementById('welcome-message');
@@ -387,21 +384,21 @@
             }
         }
         
-        // Logout function
+        
         function logout() {
-            // Clear all stored data
+         
             localStorage.removeItem('timekeeper_username');
             localStorage.removeItem('timekeeper_stopwatch');
             localStorage.removeItem('timekeeper_timer');
             localStorage.removeItem('timekeeper_alarm');
             
-            // Redirect to login
+         
             window.location.href = 'login.jsp';
         }
         
-        // ==================== DATA PERSISTENCE ====================
+    
         
-        // Save stopwatch state
+  
         function saveStopwatchState() {
             const stopwatchState = {
                 elapsedTime: stopwatchElapsedTime,
@@ -411,22 +408,20 @@
             };
             localStorage.setItem('timekeeper_stopwatch', JSON.stringify(stopwatchState));
         }
-        
-        // Load stopwatch state
+       
         function loadStopwatchState() {
             const saved = localStorage.getItem('timekeeper_stopwatch');
             if (saved) {
                 const state = JSON.parse(saved);
                 stopwatchElapsedTime = state.elapsedTime || 0;
                 
-                // If stopwatch was running, calculate elapsed time since last save
                 if (state.isRunning && state.startTime) {
                     const timeSinceSave = Date.now() - state.lastSave;
                     stopwatchElapsedTime += timeSinceSave;
                     stopwatchStartTime = Date.now() - stopwatchElapsedTime;
                     isStopwatchRunning = true;
                     
-                    // Restart the stopwatch if it was running
+                   
                     setTimeout(() => {
                         startStopwatch();
                     }, 100);
@@ -437,7 +432,7 @@
             }
         }
         
-        // Save timer state
+      
         function saveTimerState() {
             const timerState = {
                 seconds: timerSeconds,
@@ -447,21 +442,20 @@
             localStorage.setItem('timekeeper_timer', JSON.stringify(timerState));
         }
         
-        // Load timer state
+        
         function loadTimerState() {
             const saved = localStorage.getItem('timekeeper_timer');
             if (saved) {
                 const state = JSON.parse(saved);
                 timerSeconds = state.seconds || 0;
-                
-                // If timer was running, calculate remaining time since last save
+
                 if (state.isRunning) {
                     const timeSinceSave = Math.floor((Date.now() - state.lastSave) / 1000);
                     timerSeconds = Math.max(0, state.seconds - timeSinceSave);
                     
                     if (timerSeconds > 0) {
                         isTimerRunning = true;
-                        startTimer(); // This will start the countdown from current time
+                        startTimer(); // 
                     } else {
                         isTimerRunning = false;
                         updateTimerDisplay();
@@ -473,7 +467,6 @@
             }
         }
         
-        // Save alarm state
         function saveAlarmState() {
             const alarmState = {
                 alarmTime: alarmTime,
@@ -482,7 +475,7 @@
             localStorage.setItem('timekeeper_alarm', JSON.stringify(alarmState));
         }
         
-        // Load alarm state
+    
         function loadAlarmState() {
             const saved = localStorage.getItem('timekeeper_alarm');
             if (saved) {
@@ -496,7 +489,7 @@
                     document.getElementById('alarm-status').textContent = alarmStatus;
                     document.getElementById('alarm-status').className = 'status-message status-active';
                     
-                    // Restart alarm checking
+                    
                     if (alarmInterval) clearInterval(alarmInterval);
                     alarmInterval = setInterval(() => {
                         checkAlarm(new Date());
@@ -505,7 +498,7 @@
             }
         }
         
-        // ==================== CLOCK FUNCTIONALITY ====================
+     
         
         function updateClock() {
             const now = new Date();
@@ -523,7 +516,7 @@
             checkAlarm(now);
         }
         
-        // ==================== TIMER FUNCTIONALITY ====================
+      
         
         let timerInterval;
         let timerSeconds = 0;
@@ -536,7 +529,7 @@
             const minutes = parseInt(document.getElementById('timer-minutes').value) || 0;
             const seconds = parseInt(document.getElementById('timer-seconds').value) || 0;
             
-            // Only set timerSeconds if starting fresh (not resuming)
+        
             if (timerSeconds === 0) {
                 timerSeconds = hours * 3600 + minutes * 60 + seconds;
             }
@@ -556,14 +549,14 @@
             timerInterval = setInterval(() => {
                 timerSeconds--;
                 updateTimerDisplay();
-                saveTimerState(); // Save state every second
+                saveTimerState();
                 
                 if (timerSeconds <= 0) {
                     clearInterval(timerInterval);
                     isTimerRunning = false;
                     alert("⏰ Timer finished!");
                     playAlertSound();
-                    localStorage.removeItem('timekeeper_timer'); // Clear saved timer
+                    localStorage.removeItem('timekeeper_timer'); 
                     
                     document.getElementById('timer-start').disabled = false;
                     document.getElementById('timer-stop').disabled = true;
@@ -627,7 +620,7 @@
             stopwatchInterval = setInterval(() => {
                 stopwatchElapsedTime = Date.now() - stopwatchStartTime;
                 updateStopwatchDisplay();
-                saveStopwatchState(); // Save state periodically
+                saveStopwatchState(); 
             }, 100);
         }
         
@@ -647,7 +640,7 @@
             stopwatchElapsedTime = 0;
             isStopwatchRunning = false;
             updateStopwatchDisplay();
-            localStorage.removeItem('timekeeper_stopwatch'); // Clear saved stopwatch
+            localStorage.removeItem('timekeeper_stopwatch'); 
             
             document.getElementById('stopwatch-start').disabled = false;
             document.getElementById('stopwatch-stop').disabled = true;
@@ -662,8 +655,7 @@
             const displayText = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             document.getElementById('stopwatch-display').textContent = displayText;
         }
-        
-        // ==================== ALARM FUNCTIONALITY ====================
+     
         
         let alarmTime = null;
         let alarmInterval;
@@ -713,7 +705,6 @@
             }
         }
         
-        // ==================== UTILITY FUNCTIONS ====================
         
         function playAlertSound() {
             try {
@@ -754,7 +745,7 @@
             }
         }
         
-        // Input validation
+        
         document.getElementById('timer-hours').addEventListener('input', function() {
             if (this.value < 0) this.value = 0;
             if (this.value > 23) this.value = 23;
@@ -770,32 +761,29 @@
             if (this.value > 59) this.value = 59;
         });
         
-        // Quick timer buttons
+
         function setQuickTimer(minutes) {
             document.getElementById('timer-hours').value = 0;
             document.getElementById('timer-minutes').value = minutes;
             document.getElementById('timer-seconds').value = 0;
         }
-        
-        // Save state before page unload
+    
         window.addEventListener('beforeunload', function() {
             saveStopwatchState();
             saveTimerState();
             saveAlarmState();
         });
-        
-        // Initialize the application
+    
         function init() {
             checkUserSession();
             updateClock();
             setInterval(updateClock, 1000);
             
-            // Load saved states
+         
             loadStopwatchState();
             loadTimerState();
             loadAlarmState();
-            
-            // Initialize displays
+  
             updateTimerDisplay();
             updateStopwatchDisplay();
         }
