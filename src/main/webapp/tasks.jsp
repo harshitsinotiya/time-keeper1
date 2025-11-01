@@ -8,7 +8,7 @@
     <title>Tasks - Time Keeper</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        /* Your existing CSS styles */
+        
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); color: white; min-height: 100vh; display: flex; flex-direction: column; }
         header { background-color: rgba(0, 0, 0, 0.7); padding: 1rem; text-align: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
@@ -26,7 +26,6 @@
         button:hover { background-color: #45a049; }
         footer { background-color: rgba(0, 0, 0, 0.7); padding: 1rem; text-align: center; margin-top: auto; }
 
-        /* Tasks Specific Styles */
         .filter-controls { display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
         .filter-controls button { background-color: rgba(255, 255, 255, 0.2); }
         .filter-controls button.active { background-color: #4CAF50; }
@@ -84,7 +83,7 @@
     </header>
 
     <main>
-        <!-- Messages -->
+        
         <c:if test="${not empty sessionScope.message}">
             <div class="message">
                 ${sessionScope.message}
